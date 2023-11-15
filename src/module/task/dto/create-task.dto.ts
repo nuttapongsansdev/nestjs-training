@@ -4,4 +4,5 @@ export class CreateTaskDTO {
   title: string;
   description: string;
   members: MemberTask[];
+  statusId: string;
 }

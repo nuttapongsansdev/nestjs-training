@@ -3,6 +3,7 @@ import {
   Controller,
   Post,
   Request,
+  Type,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -10,11 +11,23 @@ import {
 import { RegisterDTO } from './dto/register.dto';
 import { UserService } from './user.service';
 import { LocalAuthGuard } from 'src/auth/local/local-auth.guard';
+import {
+  ApiBearerAuth,
+  ApiHeader,
+  ApiOkResponse,
+  ApiResponse,
+} from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiOkResponse({ type: RegisterDTO })
+  @ApiResponse({
+    status: 400,
+    description: 'test',
+  })
   @Post('/register')
   @UsePipes(ValidationPipe)
   async register(@Body() body: RegisterDTO): Promise<any> {

@@ -24,6 +24,9 @@ export class TaskEntity {
   @Column()
   description: string;
 
+  @Column({ name: 'status_id', nullable: true })
+  statusId: string;
+
   @ManyToOne(() => StatusEntity, (statusEntity) => statusEntity.tasks)
   @JoinColumn({ name: 'status_id' })
   @Index()
